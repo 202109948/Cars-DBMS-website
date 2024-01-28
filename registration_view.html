@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body class="theBody d-flex align-items-center justify-content-center " style="font-family: 'Poppins', sans-serif;;">
+<div class="Box p-4">
+  <div class="d-flex flex-row">
+    <div class="col-8">  <h1 class="py-3">Sign Up Here</h1>
+</div>
+    <div class="col-4"> 
+       <button id="log" type="button" style="float: right;" class="smal btn btn-success">Or Log in</button>
+</div>
+  </div>
+
+  <div class="InBox p-3 mt-4">
+    <p>Please Enter Your Name and Password</p>
+    <div class="d-flex"> 
+
+  <!-- <form action="registration_service.php", method="post"> -->
+    <label for="name" class="py-3">Name:</label>
+    <input class="me-2"   type="text" id="name" name="name" placeholder="Your name..">
+
+    <label for="password" class="py-3">Password:</label>
+    <input class="me-2"   type="password" id="passaword" name="password" placeholder="********">
+    <br><br>
+    <input  class="Button" type="submit" value="Register" id="submit">
+  <!-- </form> -->
+
+  <div id="alertModal" class="modal" style="color:black">
+    <div class="modal-content">
+      <div class="d-flex flex-row p-4">
+           <div class="col-3">    <svg fill="#fff" height="3rem" width="3rem" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 208.891 208.891" xml:space="preserve" stroke="#fff">
+  
+        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+        
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <g id="SVGRepo_iconCarrier"> <path d="M0,170l65.555-65.555L0,38.891L38.891,0l65.555,65.555L170,0l38.891,38.891l-65.555,65.555L208.891,170L170,208.891 l-65.555-65.555l-65.555,65.555L0,170z"/> </g>
+        
+        </svg></div>
+        <div class="col-9">
+                <p>This username is already used!<br>Please try another one.</p>
+  
+        </div>
+      </div>
+   
+        <button class="Button2" onclick="closeModal()" >OK</button>
+      </div>
+  </div>  
+</div>
+</div>
+</div>
+<script>
+  // Get the modal element
+  var modal = document.getElementById('alertModal');
+
+  // Function to open the modal
+  function openModal() {
+      modal.style.display = 'flex';
+  }
+
+  // Function to close the modal
+  function closeModal() {
+      modal.style.display = 'none';
+  }
+
+  // Close the modal if the user clicks outside of it
+  window.onclick = function(event) {
+      if (event.target === modal) {
+          closeModal();
+      }
+  }
+
+  $(document).ready(function(){
+  $("#log").click(function(){
+    window.location.href = "login_view.html";
+  });
+  });
+$(document).ready(function(){
+  $("#submit").click(function(){
+      $.post("registration_service.php", {
+        name: $("#name").val(),
+          passaword: $("#passaword").val(),
+      }, function(data, status){
+
+          if (data.indexOf("Failed") !== -1) {
+            console.log("hello");
+            openModal();
+              
+          } else {
+            
+            $(document).ready(function(){
+   
+        $.post("login_service.php", {
+            uname: $("#name").val(),
+            passaword: $("#passaword").val(),
+        }, function(data, status){
+
+            if (data.indexOf("success") !== -1) {
+              
+                window.location.href = "main.php";
+            } else if (data.indexOf("error") !== -1) {
+              openModal();
+              } else {
+                $("#alert").html("Unexpected response from the server.");
+            }
+        });
+});
+            }
+      });
+  });
+});
+</script>
+</body>
+<style>
+  .theBody{ background-color: #f5e7df;    
+  }
+  .Box{
+    margin-top: 10%;
+
+   background-color:  #566570!important;
+   color: white;
+  width: 60vmin;
+  border-radius: 2vmin;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+
+  }
+  .InBox{
+    background-color: #42525f;  
+    border-radius: 2vmin;
+
+  }
+  .result{
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent !important;
+
+  }
+  input{
+    all: unset;
+    background-color: white;
+    color: black;
+    width: 98%;
+    padding: 1vmin;
+    border-radius: 1vmin;
+    padding-left: 1vmin;
+    margin-top: 4;
+    height: auto;
+  }
+  
+select {
+
+    background-color: rgb(228, 227, 222);
+    color: black;
+    border: 1px solid #ccc;
+    padding: 8px;
+    height: auto;
+    border-radius: 5px;
+    outline: none; 
+    cursor: pointer; 
+}
+
+
+  .Button{
+    all: unset;
+    background-color: rgb(238, 236, 217)!important;
+    color: #42525f;
+    border-radius: 1vmin;
+    padding: 1vmin;
+    height: fit-content;
+   text-align: center;
+   width: 50%;
+   margin-left: 25%;
+   margin-top: 4;
+  }
+  .Button:hover{
+    background-color:  #566570!important;
+    color: white;
+  }
+  table, tr, td {
+    border: 1px solid black;
+    border-radius: 1vmin;
+    padding: 1vmin;
+
+}
+th{
+  background-color: #42525f;
+  color: white;
+  border: 1px solid black;
+  padding: 1vmin;
+
+}
+
+.Result{
+  background-color: white !important;
+  border-radius: 1vmin;
+}
+.d-flex { 
+    flex-direction: column;
+        width: 100%;
+        margin: 0 auto;
+       }
+@media (max-width: 900px) {
+  .Box {
+    width: 70vw;
+    flex-direction: column;
+margin-top: 25%;
+  }
+  .d-flex { 
+    flex-direction: column;
+        width: 100%;
+        margin: 0 auto;
+       }
+
+       input{
+        margin-top: 3%;
+        text-align: center;
+        width : 70%;
+        margin-left: 15%;
+        font-size: small;
+        padding: 2vmin;
+       }
+       .Button{
+        margin-top: 3%;
+width: 50%;
+font-size: small;
+margin-left: 25%;
+text-align: center;
+       }
+     
+      table{
+       font-size: 7.5pt;
+      }
+      select {
+        margin-top: 3%;
+        text-align: center;
+        width : 70%;
+        margin-left: 16%;
+        font-size: small;
+}
+}
+@media (max-width: 460px) {
+  .smal{
+    font-size: 8pt;
+  }
+h1{
+  font-size: 1em;
+}
+.py-3{
+  text-align: center;
+}
+input{
+  font-size: 8pt;
+}
+select{
+  font-size: 8pt;
+}
+.Button{
+  font-size: 8pt;
+}
+p{
+  font-size: smaller;
+}
+table{
+       font-size: 6pt;
+      }
+}
+
+
+
+.modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: brown;
+            padding: 20px;
+            color: white;
+            border-radius: 5px;
+            width: fit-content !important;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-btn {
+            cursor: pointer;
+            float: right;
+            font-size: 18px;
+            font-weight: bold;
+            width: fit-content !important;
+        }
+
+        .show{
+            display: flex;
+        }
+        .Button2{
+    all: unset;
+    background-color: rgb(16, 14, 1)!important;
+    color: #ffffff;
+    border-radius: 1vmin;
+    padding: 1vmin;
+    height: fit-content;
+   text-align: center;
+   width: 20%;
+  }
+
+  .Button2:hover{
+    background-color:  #c4d7e5!important;
+    color: rgb(27, 17, 17);
+  }
+</style>
+</html>
+
+

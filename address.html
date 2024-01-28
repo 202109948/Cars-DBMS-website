@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+      </head>
+ <body class="theBody d-flex align-items-center justify-content-center " style="font-family: 'Poppins', sans-serif;;">
+  <div class="Box p-4">
+    <h1 class="py-3">Address Table</h1>
+    <div class="InBox p-3 mt-4">
+    <p>Enter the address id</p>
+    <div class="d-flex">   
+    <input class="me-2" type="text" id="Aid"/>
+    <button class="Button" id="button">search</button></div>
+      <div class="d-flex my-4">
+            <button class="Button me-4" id="update">update the record</button> 
+            <button class="Button me-4" id="insert">insert a new record</button>
+            <button class="Button me-4" id="reset">Reset</button>
+          </div>
+          <div class="d-flex my-2">
+                      <div class = "d-flex" id="alert"></div>
+          </div>
+      <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center Result" id="result"></div>
+
+      </div>
+    </div>
+
+  </div>
+    
+    <script>
+      $(document).ready(function(){
+            $.post("address.php",
+            function(data,status){
+              $("#alert").empty();
+          $("#result").empty().hide().html(data).fadeIn(500);
+            });
+          });
+          $(document).ready(function(){
+          $("#reset").click(function(){
+            $.post("address.php",
+            function(data,status){
+              $("#alert").empty();
+          $("#result").empty().hide().html(data).fadeIn(500);
+            });
+          });
+        });
+        
+        $(document).ready(function(){
+      $("#button").click(function(){
+        $.post("addressS.php",
+        {
+          Aid: $("#Aid").val(),
+        },
+        function(data, status){
+          $("#alert").empty();
+          $("#result").empty().hide().html(data).fadeIn(500);
+        });
+      });
+    });
+    
+        $(document).ready(function(){
+          $("#update").click(function(){
+            $.post("addressU.php",
+            function(data,status){
+              $("#result").empty();
+          $("#alert").empty().hide().html(data).fadeIn(500);
+            });
+          });
+        });
+
+        $(document).ready(function(){
+          $("#insert").click(function(){
+            $.post("addressI.php",
+            function(data,status){
+              $("#result").empty();
+          $("#alert").empty().hide().html(data).fadeIn(500);
+            });
+          });
+        });
+        </script>
+ </body>
+</html>
