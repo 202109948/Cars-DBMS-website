@@ -1,6 +1,6 @@
-#Cars_DB
+\Cars_DB
 
-descriotion!!
+descriotion
 
 This repository serves as a Database Management System for a car-related project. To get started, make sure you have downloaded and installed XAMPP. The database structure is stored in the 'hasan.sql' file, which you can import into PHPMyAdmin.
 
