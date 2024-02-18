@@ -1,4 +1,4 @@
-# Cars_DB Database Management System!
+# Cars_DB Database Management System
 
 ## Description:
 
