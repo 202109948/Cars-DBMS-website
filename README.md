@@ -4,6 +4,11 @@
 
 This repository serves as a Database Management System for a car-related project. To get started, make sure you have downloaded and installed [XAMPP](https://www.apachefriends.org/index.html). The database structure is stored in the 'hasan.sql' file, which you can import into PHPMyAdmin.
 
+![tables](Screenshot1.png)
+
+
+![tables](Screenshot2.png)
+
 ## Installation
 
 1. **XAMPP Installation:**
