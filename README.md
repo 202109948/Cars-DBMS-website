@@ -25,7 +25,7 @@ The file management within this repository may need improvement but is generally
 
 ## Usage
 
-- With the database structure imported, you can now interact with the Cars_DB Database Management System.
+- With the database structure imported, you can now interact with the Cars_DB Management System.
 - Review the files for specific functionalities related to car data.
 
 ## Additional Notes
